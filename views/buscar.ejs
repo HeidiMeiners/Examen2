@@ -1,0 +1,22 @@
+<%- include("partials/header"); -%>
+
+<%- include("partials/navbar"); -%>
+<p>Hola</p>
+
+<% if (resultados && resultados.length > 0) { %>
+    <ul>
+        <% resultados.forEach(personaje => { %>
+            <p> Id: <%= personaje.id %></p>
+            <p> Name: <%= personaje.firstName %></p>
+            <p> Last Name: <%= personaje.lastName %></p>
+            <p> Full Name: <%= personaje.fullName %></p>
+            <p> Title: <%= personaje.title %></p>
+            <p> Family: <%= personaje.family %></p>
+            <img src=<%= personaje.imageUrl %>>
+            <br>
+        <% }); %>
+    </ul>
+<% } else { %>
+    <p>No se encontraron personajes que coincidan con tu búsqueda.</p>
+<% } %>
+<%- include("partials/footer"); -%>
