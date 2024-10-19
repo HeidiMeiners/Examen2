@@ -2,17 +2,10 @@
 
 <%- include("partials/navbar"); -%>
 
+<h1>Characters</h1>
+
 <%if (personajes){ %>
-    <% personajes.forEach(personaje => { %>
-        <p>Id: <%= personaje.id %></p>
-        <p>Name: <%= personaje.firstName %></p>
-        <p>Last Name: <%= personaje.lastName %></p>
-        <p>Full Name: <%= personaje.fullName %></p>
-        <p>Title: <%= personaje.title %></p>
-        <p>Family: <%= personaje.family %></p>
-        <img src="<%= personaje.imageUrl %>" alt="Imagen de <%= personaje.fullName %>">
-    <br>
-<% }); %>
+    <%- include("partials/carrusel"); -%>
 <%}%>
 
 <%- include("partials/footer"); -%>

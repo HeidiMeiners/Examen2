@@ -1,4 +1,15 @@
 body{
     color: rgb(0, 0, 0) !important;
     background-color: #dedede !important; 
+    font-family: 'Almendra', serif !important;
+}
+
+h1,h3{
+    text-align: center;
+}
+
+.centrar{
+    display: flex;
+    justify-content: center;
+    align-items: center; 
 }

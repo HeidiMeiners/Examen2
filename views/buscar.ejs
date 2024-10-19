@@ -2,19 +2,12 @@
 
 <%- include("partials/navbar"); -%>
 
+<h3>We found this according to your search</h3>
+
 <% if (personajes.length > 0) { %>
-        <% personajes.forEach(personaje => { %> 
-                <p>Id: <%= personaje.id %></p>
-                <p>Name: <%= personaje.firstName %></p>
-                <p>Last Name: <%= personaje.lastName %></p>
-                <p>Full Name: <%= personaje.fullName %></p>
-                <p>Title: <%= personaje.title %></p>
-                <p>Family: <%= personaje.family %></p>
-                <img src="<%= personaje.imageUrl %>" alt="Imagen de <%= personaje.fullName %>">
-                <br>
-        <% }); %>
+    <%- include("partials/carrusel"); -%>
 <% } else { %>
-    <p>No se encontraron personajes que coincidan con tu búsqueda.</p>
+    <p>Nothing found</p>
 <% } %>
 
 <%- include("partials/footer"); -%>
