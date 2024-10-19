@@ -2,16 +2,17 @@
 
 <%- include("partials/navbar"); -%>
 
-<% if (personaje) { %>
-    <p> Id: <%= personaje.id %></p>
-    <p> Name: <%= personaje.firstName %></p>
-    <p> Last Name: <%= personaje.lastName %></p>
-    <p> Full Name: <%= personaje.fullName %></p>
-    <p> Title: <%= personaje.title %></p>
-    <p> Family: <%= personaje.family %></p>
-    <img src=<%= personaje.imageUrl %>>
-<% } else { %>
-    <p>No hay personajes disponibles.</p>
-<% } %>
+<%if (personajes){ %>
+    <% personajes.forEach(personaje => { %>
+        <p>Id: <%= personaje.id %></p>
+        <p>Name: <%= personaje.firstName %></p>
+        <p>Last Name: <%= personaje.lastName %></p>
+        <p>Full Name: <%= personaje.fullName %></p>
+        <p>Title: <%= personaje.title %></p>
+        <p>Family: <%= personaje.family %></p>
+        <img src="<%= personaje.imageUrl %>" alt="Imagen de <%= personaje.fullName %>">
+    <br>
+<% }); %>
+<%}%>
 
 <%- include("partials/footer"); -%>

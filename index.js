@@ -11,41 +11,9 @@ app.use(express.static('public'));
 
 var personaje = "";
 
-app.get('/infoGOT/:id', (req, res) => {
-  const characterId = req.params.id; // Obtiene el ID del personaje de la URL
-  const url = `https://ThronesApi.com/api/v2/Characters/${characterId}`; // Actualiza la URL con el ID
+app.get('/', (req, res) => {
+  const url = `https://thronesapi.com/api/v2/Characters`; // URL para obtener todos los personajes
 
-  https.get(url, (response) => {
-      console.log("Got a response");
-      let resContent = "";
-
-      response.on("data", (data) => {
-          resContent += data;
-      }).on("end", () => {
-          try {
-              const jsonObj = JSON.parse(resContent);
-              console.log(jsonObj); // Log para verificar la estructura de datos
-
-              // Almacena el personaje en la variable
-              personaje = jsonObj;
-
-              res.redirect("/"); // Redirige a la página de inicio
-          } catch (error) {
-              console.error("Error parsing JSON:", error);
-              res.redirect("/");
-          }
-      }).on("error", (e) => {
-          console.error(`Got an error: ${e.message}`);
-          res.redirect("/");
-      });
-  });
-});
-
-app.get('/search', (req, res) => {
-  const id = req.query.id; // Obtiene el ID del personaje desde la consulta
-  console.log("Consulta de búsqueda por ID:", id); // Log para verificar el valor del ID
-
-  const url = `https://thronesapi.com/api/v2/Characters/${id}`; // URL de la API para buscar por ID
   https.get(url, (response) => {
       let resContent = "";
 
@@ -53,24 +21,25 @@ app.get('/search', (req, res) => {
           resContent += data;
       }).on("end", () => {
           try {
-              const personaje = JSON.parse(resContent);
-              console.log("Resultado de la API:", personaje); // Log para verificar el resultado
+              const personajes = JSON.parse(resContent); // Parsear la lista completa de personajes
+              console.log("Lista de personajes obtenida:", personajes); // Verifica que los personajes están llegando
 
-              // Renderiza la vista con el personaje
-              res.render('buscar', { personaje: personaje });
+              // Renderizar la vista home.ejs y pasar la variable personajes
+              res.render('home', { personajes: personajes });
           } catch (error) {
               console.error("Error parsing JSON:", error);
               res.redirect("/"); // Redirige en caso de error
           }
       }).on("error", (e) => {
-          console.error(`Got an error: ${e.message}`);
+          console.error(`Error: ${e.message}`);
           res.redirect("/"); // Redirige en caso de error
       });
   });
 });
 
+
 app.get('/', (req, res) => {
-  res.render('home', { personaje : personaje}); // Render
+  res.render('home', { personajes : personaje});
 });
 
 app.listen(4000, () => {
